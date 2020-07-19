@@ -1,0 +1,9 @@
+version: "3.7"
+services:
+  ffmpeg:
+    build:
+      context: .
+      dockerfile: Dockerfile_translate
+    volumes:
+       - .:/app
+    entrypoint: ["tail", "-f", "/dev/null"]

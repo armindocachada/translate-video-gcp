@@ -1,0 +1,9 @@
+FROM jrottenberg/ffmpeg:3.2.15-centos7
+
+RUN yum update -y && yum install -y python3 && yum install -y python3-pip && pip3 install --upgrade pip
+
+RUN echo "export LANG=en_GB.UTF-8" >> /root/.bashrc
+
+COPY python/requirements.txt /tmp/requirements.txt
+
+RUN pip3 install -r /tmp/requirements.txt
