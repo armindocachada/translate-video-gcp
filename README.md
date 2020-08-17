@@ -31,7 +31,7 @@ Lets get started!
 Create a project in your GCP Account
 ------------------------------------
 
-<img alt="Image for post" class="s t u by ai" src="https://github.com/armindocachada/translate-video-gcp/raw/master/images/new_project.png" width="656" height="533" sizes="656px"/>
+<img alt="Image for post"  src="https://github.com/armindocachada/translate-video-gcp/raw/master/images/new_project.png"/>
 
 In order to get started you need to create a project in GCP.
 
@@ -42,13 +42,13 @@ Navigate to IAM&Admin-Service Accounts.
 
 Click on “**Create a Service Account**”
 
-<img alt="Image for post" src="https://github.com/armindocachada/translate-video-gcp/raw/master/images/create_service_account.png" width="1309" height="507"/>
+<img src="https://github.com/armindocachada/translate-video-gcp/raw/master/images/create_service_account.png"/>
 
 Type the name of the service account and click **Create**.
 
 In the next screen add the roles **Project -> Owner** and **Storage Admin**
 
-<img alt="Image for post" src="https://github.com/armindocachada/translate-video-gcp/raw/master/images/storage_admin_permissions.png" width="1309" height="507"/>
+<img alt="Image for post" src="https://github.com/armindocachada/translate-video-gcp/raw/master/images/storage_admin_permissions.png" />
 
 Click Continue and then click Done on the third optional screen.
 
@@ -61,7 +61,7 @@ Now you should enable the three APIs that we will need for this exercise.
 
 Go to API’s and services. Click on Cloud Speech To Text API
 
-<img alt="Image for post" src="https://github.com/armindocachada/translate-video-gcp/raw/master/images/cloud_to_speech_enable.png" width="1309" height="507"/>
+<img alt="Image for post" src="https://github.com/armindocachada/translate-video-gcp/raw/master/images/cloud_to_speech_enable.png"/>
 Click **Enable**.
 
 Repeat for the **Cloud Translation API** and **Cloud Text To Speech API**.
