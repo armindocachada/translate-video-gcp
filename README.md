@@ -142,6 +142,7 @@ Specify an unique bucket name and click create. You will need this bucket in the
 **Calling the Google Speech to Text API**
 
 Now that we have the code to upload the audio file, we can call the Google Text To Speech Cloud API.
+[![](https://gist.github.com/armindocachada/0685821df39759868a905ad2a3b47f46.js "")
 <script src="https://gist.github.com/armindocachada/0685821df39759868a905ad2a3b47f46.js"></script>
 The transcript is returned as a list of results and each result has 1 or more alternatives. Alternatives are provided when the speech engine is not sure of was actually said, so it gives you a few possibilities to select. To simplify and given this is just a proof of concept, I am always selecting the first alternative available.
 
