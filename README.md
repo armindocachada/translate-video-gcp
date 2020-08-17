@@ -137,14 +137,33 @@ For that we need to create a bucket in Google Cloud. In the GCP Dashboard, go to
 <img alt="Image for post" src="https://github.com/armindocachada/translate-video-gcp/raw/master/images/create_bucket.png" />
 
 Specify an unique bucket name and click create. You will need this bucket in the code to upload the audio file.
-<script src="https://gist.github.com/armindocachada/e2855ef43dd9c1a84c6675454038a7ab.js"></script>
-{% gist e2855ef43dd9c1a84c6675454038a7ab %}
 
+```
+def upload_blob(bucket_name, source_file_name, destination_blob_name):
+    """Uploads a file to the bucket."""
+    # bucket_name = "your-bucket-name"
+    # source_file_name = "local/path/to/file"
+    # destination_blob_name = "storage-object-name"
+
+    storage_client = storage.Client()
+    bucket = storage_client.bucket(bucket_name)
+    blob = bucket.blob(destination_blob_name)
+
+    blob.upload_from_filename(source_file_name)
+
+    print(
+        "File {} uploaded to {}.".format(
+            source_file_name, destination_blob_name
+        )
+    )
+```
 **Calling the Google Speech to Text API**
 
 Now that we have the code to upload the audio file, we can call the Google Text To Speech Cloud API.
 [![](https://gist.github.com/armindocachada/0685821df39759868a905ad2a3b47f46.js "")
 <script src="https://gist.github.com/armindocachada/0685821df39759868a905ad2a3b47f46.js"></script>
+
+
 The transcript is returned as a list of results and each result has 1 or more alternatives. Alternatives are provided when the speech engine is not sure of was actually said, so it gives you a few possibilities to select. To simplify and given this is just a proof of concept, I am always selecting the first alternative available.
 
 **Calling the Google Translation API**
