@@ -160,7 +160,7 @@ def upload_blob(bucket_name, source_file_name, destination_blob_name):
 **Calling the Google Speech to Text API**
 
 Now that we have the code to upload the audio file, we can call the Google Text To Speech Cloud API.
-'''
+```
 def speech_to_text(bucket_name, audio_blob_name):
     client = speech_v1p1beta1.SpeechClient()
     # storage_uri = 'gs://cloud-samples-data/speech/brooklyn_bridge.mp3'
@@ -189,14 +189,14 @@ def speech_to_text(bucket_name, audio_blob_name):
 
         print(u"Transcript: {}".format(alternative.transcript))
     return alternative.transcript
-'''
+```
 
 The transcript is returned as a list of results and each result has 1 or more alternatives. Alternatives are provided when the speech engine is not sure of was actually said, so it gives you a few possibilities to select. To simplify and given this is just a proof of concept, I am always selecting the first alternative available.
 
 **Calling the Google Translation API**
 
 After we have a copy in text of what was actually said in the video, we are ready to translate it into a different language.
-'''
+```
 def translate(text,language):
     from google.cloud import translate_v2 as translate
     translate_client = translate.Client()
@@ -216,14 +216,14 @@ def translate(text,language):
         result['detectedSourceLanguage'])
     )
     return result['translatedText']
-'''
+```
 
 **Calling the Google Text To Speech API**
 
 Now that we have the translated text, we can use Google’s Text to Speech API to convert it to an MP3 file.  
 There are a few parameters here that I just want to briefly explain. You can set the speed at which the speaker talks. In my video demo I went with 0.8 to keep up with my own speaking rate. If you are not sure in your case, leave it at 1.0.  
 You can also set a pitch. The pitch will set the tone of the voice. If you are not sure what exact voice to use, set the gender of the voice. And most important of all, you need to specify the **languageCode** of the voice you are looking for. The library will then select the best available voice within a list taking into account the parameters given to **VoiceSelectionParams**.
-'''
+```
 def text_to_speech(speak, languageCode, outputFilePath, speed=1.0):
     """Synthesizes speech from the input string of text or ssml.
     Note: ssml must be well-formed according to:
@@ -260,11 +260,11 @@ def text_to_speech(speak, languageCode, outputFilePath, speed=1.0):
         # Write the response to the output file.
         out.write(response.audio_content)
         print('Audio content written to file "{}"'.format(outputFilePath))
-'''
+```
 **Putting everything together**
 
 The last piece in our puzzle is to replace the original audio in the video that we passed as input and replace it with the new audio voice over. Thankfully with **ffmpeg** that is quite easy to do.
-'''
+```
 def merge_video_with_audio_ffmpeg(videoFilePath,audioFilePath,filePathOutput,start_time_audio="00:00:05"):
     subprocess.call(['ffmpeg', '-i', videoFilePath,
                      '-itsoffset', start_time_audio,
@@ -273,7 +273,7 @@ def merge_video_with_audio_ffmpeg(videoFilePath,audioFilePath,filePathOutput,sta
                      '-map', '0:v:0',
                      '-map', '1:a:0',
                      filePathOutput, '-y'])
-'''
+```
 And that’s it!
 
 Now the next step is to record a small introductory video and try our script.
