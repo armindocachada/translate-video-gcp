@@ -138,6 +138,7 @@ For that we need to create a bucket in Google Cloud. In the GCP Dashboard, go to
 
 Specify an unique bucket name and click create. You will need this bucket in the code to upload the audio file.
 <script src="https://gist.github.com/armindocachada/e2855ef43dd9c1a84c6675454038a7ab.js"></script>
+{% gist e2855ef43dd9c1a84c6675454038a7ab %}
 
 **Calling the Google Speech to Text API**
 
