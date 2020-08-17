@@ -160,22 +160,107 @@ def upload_blob(bucket_name, source_file_name, destination_blob_name):
 **Calling the Google Speech to Text API**
 
 Now that we have the code to upload the audio file, we can call the Google Text To Speech Cloud API.
-[![](https://gist.github.com/armindocachada/0685821df39759868a905ad2a3b47f46.js "")
-<script src="https://gist.github.com/armindocachada/0685821df39759868a905ad2a3b47f46.js"></script>
+'''
+def speech_to_text(bucket_name, audio_blob_name):
+    client = speech_v1p1beta1.SpeechClient()
+    # storage_uri = 'gs://cloud-samples-data/speech/brooklyn_bridge.mp3'
+    storage_uri = 'gs://' + bucket_name + '/' + audio_blob_name
+    # The language of the supplied audio
+    language_code = "en-GB"
+    # Sample rate in Hertz of the audio data sent
+    sample_rate_hertz = 44100
 
+    encoding = enums.RecognitionConfig.AudioEncoding.MP3
+    config = {
+        "language_code": language_code,
+        "sample_rate_hertz": sample_rate_hertz,
+        "encoding": encoding,
+        "enable_word_time_offsets": True
+    }
+    audio = {"uri": storage_uri}
+
+    response = client.recognize(config, audio)
+    for result in response.results:
+        # First alternative is the most probable result
+        alternative = result.alternatives[0]
+        for word in alternative.words:
+            print("Start Time: {}".format(word.start_time))
+            print("End Time: {}".format(word.end_time))
+
+        print(u"Transcript: {}".format(alternative.transcript))
+    return alternative.transcript
+'''
 
 The transcript is returned as a list of results and each result has 1 or more alternatives. Alternatives are provided when the speech engine is not sure of was actually said, so it gives you a few possibilities to select. To simplify and given this is just a proof of concept, I am always selecting the first alternative available.
 
 **Calling the Google Translation API**
 
 After we have a copy in text of what was actually said in the video, we are ready to translate it into a different language.
+'''
+def translate(text,language):
+    from google.cloud import translate_v2 as translate
+    translate_client = translate.Client()
+
+    if isinstance(text, bytes):
+        text = text.decode('utf-8')
+
+    # Text can also be a sequence of strings, in which case this method
+    # will return a sequence of results for each text.
+    result = translate_client.translate(
+        text, target_language=language)
+
+    print(u'Text: {}'.format(result['input']))
+    print(u'Translation: {}'.format(result['translatedText']))
+
+    print(u'Detected source language: {}'.format(
+        result['detectedSourceLanguage'])
+    )
+    return result['translatedText']
+'''
 
 **Calling the Google Text To Speech API**
 
 Now that we have the translated text, we can use Google’s Text to Speech API to convert it to an MP3 file.  
 There are a few parameters here that I just want to briefly explain. You can set the speed at which the speaker talks. In my video demo I went with 0.8 to keep up with my own speaking rate. If you are not sure in your case, leave it at 1.0.  
 You can also set a pitch. The pitch will set the tone of the voice. If you are not sure what exact voice to use, set the gender of the voice. And most important of all, you need to specify the **languageCode** of the voice you are looking for. The library will then select the best available voice within a list taking into account the parameters given to **VoiceSelectionParams**.
+'''
+def text_to_speech(speak, languageCode, outputFilePath, speed=1.0):
+    """Synthesizes speech from the input string of text or ssml.
+    Note: ssml must be well-formed according to:
+        https://www.w3.org/TR/speech-synthesis/
+    """
+    from google.cloud import texttospeech
 
+    # Instantiates a client
+    client = texttospeech.TextToSpeechClient()
+
+    # Set the text input to be synthesized
+    synthesis_input = texttospeech.SynthesisInput(text=speak)
+
+    # Build the voice request, select the language code ("en-US") and the ssml
+    # voice gender ("neutral")
+    voice = texttospeech.VoiceSelectionParams(
+        language_code=languageCode, ssml_gender=texttospeech.SsmlVoiceGender.MALE
+    )
+
+    # Select the type of audio file you want returned
+    audio_config = texttospeech.AudioConfig(
+        audio_encoding=texttospeech.AudioEncoding.MP3,
+        speaking_rate=speed
+    )
+
+    # Perform the text-to-speech request on the text input with the selected
+    # voice parameters and audio file type
+    response = client.synthesize_speech(
+        input=synthesis_input, voice=voice, audio_config=audio_config
+    )
+
+    # The response's audio_content is binary.
+    with open(outputFilePath, "wb") as out:
+        # Write the response to the output file.
+        out.write(response.audio_content)
+        print('Audio content written to file "{}"'.format(outputFilePath))
+'''
 **Putting everything together**
 
 The last piece in our puzzle is to replace the original audio in the video that we passed as input and replace it with the new audio voice over. Thankfully with **ffmpeg** that is quite easy to do.
