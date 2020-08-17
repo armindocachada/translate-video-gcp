@@ -134,14 +134,15 @@ To extract the text we need to use the Google Text To Speech API. But before we 
 
 For that we need to create a bucket in Google Cloud. In the GCP Dashboard, go to Storage->Browser. Click in **Create Bucket**
 
-<img alt="Image for post" class="s t u by ai" src="https://miro.medium.com/max/1062/1\*wfdTA7FeNDyYZ0Yd6DWFNA.png" width="531" height="582" srcSet="https://miro.medium.com/max/552/1\*wfdTA7FeNDyYZ0Yd6DWFNA.png 276w, https://miro.medium.com/max/1062/1\*wfdTA7FeNDyYZ0Yd6DWFNA.png 531w" sizes="531px"/>
+<img alt="Image for post" src="https://github.com/armindocachada/translate-video-gcp/raw/master/images/create_bucket.png" />
 
 Specify an unique bucket name and click create. You will need this bucket in the code to upload the audio file.
+<script src="https://gist.github.com/armindocachada/e2855ef43dd9c1a84c6675454038a7ab.js"></script>
 
 **Calling the Google Speech to Text API**
 
 Now that we have the code to upload the audio file, we can call the Google Text To Speech Cloud API.
-
+<script src="https://gist.github.com/armindocachada/0685821df39759868a905ad2a3b47f46.js"></script>
 The transcript is returned as a list of results and each result has 1 or more alternatives. Alternatives are provided when the speech engine is not sure of was actually said, so it gives you a few possibilities to select. To simplify and given this is just a proof of concept, I am always selecting the first alternative available.
 
 **Calling the Google Translation API**
