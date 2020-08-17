@@ -264,7 +264,16 @@ def text_to_speech(speak, languageCode, outputFilePath, speed=1.0):
 **Putting everything together**
 
 The last piece in our puzzle is to replace the original audio in the video that we passed as input and replace it with the new audio voice over. Thankfully with **ffmpeg** that is quite easy to do.
-
+'''
+def merge_video_with_audio_ffmpeg(videoFilePath,audioFilePath,filePathOutput,start_time_audio="00:00:05"):
+    subprocess.call(['ffmpeg', '-i', videoFilePath,
+                     '-itsoffset', start_time_audio,
+                     '-i', audioFilePath,
+                     '-c:v', 'copy',
+                     '-map', '0:v:0',
+                     '-map', '1:a:0',
+                     filePathOutput, '-y'])
+'''
 And that’s it!
 
 Now the next step is to record a small introductory video and try our script.
