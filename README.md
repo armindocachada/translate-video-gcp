@@ -31,7 +31,7 @@ Lets get started!
 Create a project in your GCP Account
 ------------------------------------
 
-<img alt="Image for post" class="s t u by ai" src="https://miro.medium.com/max/1312/1\*wN7buBdPc\_C8gJDao2DUQA.png" width="656" height="533" srcSet="https://miro.medium.com/max/552/1\*wN7buBdPc\_C8gJDao2DUQA.png 276w, https://miro.medium.com/max/1104/1\*wN7buBdPc\_C8gJDao2DUQA.png 552w, https://miro.medium.com/max/1280/1\*wN7buBdPc\_C8gJDao2DUQA.png 640w, https://miro.medium.com/max/1312/1\*wN7buBdPc\_C8gJDao2DUQA.png 656w" sizes="656px"/>
+<img alt="Image for post" class="s t u by ai" src="https://github.com/armindocachada/translate-video-gcp/raw/master/images/new_project.png" width="656" height="533" sizes="656px"/>
 
 In order to get started you need to create a project in GCP.
 
@@ -42,13 +42,13 @@ Navigate to IAM&Admin-Service Accounts.
 
 Click on “**Create a Service Account**”
 
-<img alt="Image for post" class="s t u by ai" src="https://miro.medium.com/max/2618/1\*LKlQbw8q4cF6fF2x7q7C-w.png" width="1309" height="507" srcSet="https://miro.medium.com/max/552/1\*LKlQbw8q4cF6fF2x7q7C-w.png 276w, https://miro.medium.com/max/1104/1\*LKlQbw8q4cF6fF2x7q7C-w.png 552w, https://miro.medium.com/max/1280/1\*LKlQbw8q4cF6fF2x7q7C-w.png 640w, https://miro.medium.com/max/1400/1\*LKlQbw8q4cF6fF2x7q7C-w.png 700w" sizes="700px"/>
+<img alt="Image for post" src="https://github.com/armindocachada/translate-video-gcp/raw/master/images/create_service_account.png" width="1309" height="507"/>
 
 Type the name of the service account and click **Create**.
 
 In the next screen add the roles **Project -> Owner** and **Storage Admin**
 
-<img alt="Image for post" class="s t u by ai" src="https://miro.medium.com/max/2134/1\*h3KWnby2aSrF\_P2awPCsNw.png" width="1067" height="506" srcSet="https://miro.medium.com/max/552/1\*h3KWnby2aSrF\_P2awPCsNw.png 276w, https://miro.medium.com/max/1104/1\*h3KWnby2aSrF\_P2awPCsNw.png 552w, https://miro.medium.com/max/1280/1\*h3KWnby2aSrF\_P2awPCsNw.png 640w, https://miro.medium.com/max/1400/1\*h3KWnby2aSrF\_P2awPCsNw.png 700w" sizes="700px"/>
+<img alt="Image for post" src="https://github.com/armindocachada/translate-video-gcp/raw/master/images/storage_admin_permissions.png" width="1309" height="507"/>
 
 Click Continue and then click Done on the third optional screen.
 
@@ -61,8 +61,7 @@ Now you should enable the three APIs that we will need for this exercise.
 
 Go to API’s and services. Click on Cloud Speech To Text API
 
-<img alt="Image for post" class="s t u by ai" src="https://miro.medium.com/max/1104/1\*xkPyRIbLDYF-Jt1Fp7lIPA.png" width="552" height="331" srcSet="https://miro.medium.com/max/552/1\*xkPyRIbLDYF-Jt1Fp7lIPA.png 276w, https://miro.medium.com/max/1104/1\*xkPyRIbLDYF-Jt1Fp7lIPA.png 552w" sizes="552px"/>
-
+<img alt="Image for post" src="https://github.com/armindocachada/translate-video-gcp/raw/master/images/cloud_to_speech_enable.png" width="1309" height="507"/>
 Click **Enable**.
 
 Repeat for the **Cloud Translation API** and **Cloud Text To Speech API**.
