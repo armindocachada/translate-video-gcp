@@ -165,3 +165,5 @@ Now the next step is to record a small introductory video and try our script.
 Disclaimers, you are not going to get production level voice-overs at this stage, but hopefully this demo will give you a taste of the potential with this unprecedented Google technology.
 
 For a detailed step by step instruction, do watch my latest video:
+
+[![](http://img.youtube.com/vi/XFRrEuPqUKY/0.jpg)](http://www.youtube.com/watch?v=XFRrEuPqUKY "")
